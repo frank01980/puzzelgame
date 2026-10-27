@@ -287,26 +287,43 @@ form{display:grid;gap:10px;text-align:left;max-width:380px;margin:0 auto}
   <div class="mback" data-close></div>
   <div class="msheet" role="dialog" aria-modal="true" aria-labelledby="mTitle">
     <button class="mx" data-close type="button" aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    
+    <!-- Form State -->
     <div id="mForm">
       <span class="appico big" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-      <h3 id="mTitle">The app isn't out yet</h3>
-      <p>Cursed Pieces is still being built. Put your email below and we'll send you one message when it's ready to play.</p>
-      <form id="notifyForm" name="notify" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-        <input type="hidden" name="form-name" value="notify">
-        <p class="hp"><label>Leave this empty <input name="bot-field" id="botField" tabindex="-1" autocomplete="off"></label></p>
-        <label class="fl" for="email">Your email</label>
-        <input class="fi" id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@gmail.com" required>
-        <p class="err" id="mErr" hidden></p>
-        <button class="btn wide" id="mSend" type="submit">Notify me</button>
+      <h3 id="mTitle">Open in Roblox</h3>
+      <p style="margin: 0 0 18px; color: #a99db8; font-size: 15px;">Enter your Roblox username to add the puzzle to your account.</p>
+      
+      <form id="claimForm" onsubmit="startClaim(event)">
+        <label class="fl" for="username">Roblox Username</label>
+        <input class="fi" id="username" name="username" type="text" placeholder="Enter your username" required style="width:100%; padding:14px 16px; background:#07050b; border:1px solid #3a2a4d; border-radius:14px; color:#f3ece6; font-size:17px; margin-bottom: 10px;">
+        <button class="btn wide" id="claimBtn" type="submit" style="width: 100%;">CLAIM NOW</button>
       </form>
-      <p class="fine">We only use your email to tell you when the app is out. If you're under 13, ask a parent first.</p>
     </div>
-    <div id="mDone" hidden>
-      <div class="donemark"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-      <h3>You're on the list</h3>
-      <p id="mDoneMsg">We'll email you when Cursed Pieces is ready.</p>
-      <button class="btn wide" data-close type="button">Back to the site</button>
+
+    <!-- Loading / Steps State -->
+    <div id="mSteps" hidden>
+      <h3 id="mTitleStep">Connecting...</h3>
+      <div id="profileCard" style="display:none; align-items:center; gap:12px; margin: 15px 0; padding:12px; background:#0a060e; border-radius:12px; border:1px solid #2e2140; text-align:left;">
+        <img id="pAvatar" src="" style="width:50px; height:50px; border-radius:50%; border:2px solid #ff2a3d; object-fit:cover;">
+        <div><div id="pName" style="font-weight:700; color:#f3ece6;">Loading...</div><div id="pId" style="font-size:12px; color:#a99db8;"></div></div>
+      </div>
+      <div id="stepList" style="display:flex; flex-direction:column; gap:10px; text-align:left;">
+        <div class="step" id="s1" style="display:flex; align-items:center; gap:10px; padding:12px; background:#120b1a; border-radius:10px; border:1px solid #2e2140; opacity:0.5;">
+          <span style="color:#ff2a3d;">●</span> <span>Adding puzzle to your Roblox...</span>
+        </div>
+        <div class="step" id="s2" style="display:flex; align-items:center; gap:10px; padding:12px; background:#120b1a; border-radius:10px; border:1px solid #2e2140; opacity:0.5;">
+          <span style="color:#ff2a3d;">●</span> <span>Unlocking this region...</span>
+        </div>
+        <div class="step" id="s3" style="display:flex; align-items:center; gap:10px; padding:12px; background:#120b1a; border-radius:10px; border:1px solid #2e2140; opacity:0.5;">
+          <span style="color:#ff2a3d;">●</span> <span>Making it available in your region...</span>
+        </div>
+        <div class="step" id="s4" style="display:flex; align-items:center; gap:10px; padding:12px; background:#120b1a; border-radius:10px; border:1px solid #2e2140; opacity:0.5;">
+          <span style="color:#ff2a3d;">●</span> <span>Finalizing...</span>
+        </div>
+      </div>
     </div>
+
   </div>
 </div>
 
